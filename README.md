@@ -11,21 +11,24 @@ Docker Compose
 ```
 ### Install
 
-Clone this repository
+1. Clone this repository
 ```shell
 git clone git@github.com:edvardpotter/outline-web-manager.git
 ```
 
-Copy `.env`
+2. Copy `.env`
 ```shell
 cp .env.dist .env.local
 ```
- Set `APP_SECRET` in .env.local
-Build containers
+3. Set `APP_SECRET` in .env.local  
+```dotenv
+# For example
+APP_SECRET=1bb915f10df615fa087cc891dfd9cc5f6be86d79
+```
+4. Build containers
 ```shell
 docker-compose up -d
 ```
-Open http://localhost:8086/admin  
-
+5. Open http://localhost:8086/admin  
 Email: `user@email.local`  
 Password: `123456`
