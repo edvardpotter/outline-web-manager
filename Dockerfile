@@ -39,4 +39,5 @@ RUN composer install --no-dev --prefer-dist --no-progress --no-scripts --no-inte
 COPY --chown=www-data:www-data . /var/www
 
 RUN bin/console doctrine:migrations:migrate \
+    && bin/console assets:install \
     && bin/console user:create user@email.local 123456

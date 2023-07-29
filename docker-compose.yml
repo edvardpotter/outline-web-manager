@@ -5,14 +5,16 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    #volumes:
-    #  - ./:/var/www
+    volumes:
+      - php_public:/var/www
   caddy:
     image: caddy:2-alpine
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
-      - ./:/var/www
+      - php_public:/var/www
     ports:
       - "8086:80"
     depends_on:
       - php
+volumes:
+  php_public:
