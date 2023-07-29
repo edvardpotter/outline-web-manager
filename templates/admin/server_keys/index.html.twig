@@ -1,5 +1,21 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
+{% block body_javascript %}
+    <script type="application/javascript">
+        function copyKeyToClipboard(keyId) {
+            // Get the text field
+            let copyText = document.getElementById("key-" + keyId);
+
+            // Select the text field
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
+
+            // Copy the text inside the text field
+            navigator.clipboard.writeText(copyText.value);
+        }
+    </script>
+{% endblock body_javascript %}
+
 {% block content_title %}
     Keys
 {% endblock %}
@@ -28,62 +44,88 @@
 {% block main %}
     <table class="table datagrid ">
         <thead>
-            <tr>
-                <th><a>#ID</a></th>
-                <th><a>Name</a></th>
-                <th><a>Access url</a></th>
-                <th><a>Used bytes</a></th>
-                <th class="actions-as-dropdown-table-head" dir="ltr">
-                    <span class="sr-only">Actions</span>
-                </th>
-            </tr>
+        <tr>
+            <th><a>#ID</a></th>
+            <th><a>Name</a></th>
+            <th><a>Access url</a></th>
+            <th><a>Used bytes</a></th>
+            <th class="actions-as-dropdown-table-head" dir="ltr">
+                <span class="sr-only">Actions</span>
+            </th>
+        </tr>
         </thead>
         <tbody>
-            {% for key in keys %}
-                <tr>
-                    <td>{{ key.id }}</td>
-                    <td>
-                        {% if key.name is not empty %}
-                            {{ key.name }}
-                        {% else %}
-                            empty
-                        {% endif %}
-                    </td>
-                    <td>{{ key.accessUrl }}</td>
-                    <td>{{ (key.usedBytes / 1000 / 1000 / 1000) |number_format(2) }} GB</td>
-                    <td class="actions actions-as-dropdown">
-                        <div class="dropdown dropdown-actions">
-                            <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="21" width="21" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path>
-                                </svg>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" style="">
-                                <a class="dropdown-item action-edit" href="{{ path('admin', {
-                                    routeName: 'admin_server_keys_edit',
-                                    routeParams: {
-                                        serverId: server.id,
-                                        id: key.id
-                                    }
-                                }) }}"><span class="action-label">Edit</span></a>
-                                <a class="dropdown-item action-delete text-danger" href="{{ path('admin', {
-                                    routeName: 'admin_server_keys_delete',
-                                    routeParams: {
-                                        serverId: server.id,
-                                        id: key.id
-                                    }
-                                }) }}" data-action-name="delete" formaction="{{ path('admin', {
-                                    routeName: 'admin_server_keys_delete',
-                                    routeParams: {
-                                        serverId: server.id,
-                                        id: key.id
-                                    }
-                                }) }}" data-bs-toggle="modal" data-bs-target="#modal-delete"><span class="action-label">Delete</span></a>
+        {% for key in keys %}
+            <tr>
+                <td>{{ key.id }}</td>
+                <td>
+                    {% if key.name is not empty %}
+                        {{ key.name }}
+                    {% else %}
+                        empty
+                    {% endif %}
+                </td>
+                <td>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="input-group mb-3">
+                                <input
+                                        type="text"
+                                        class="form-control"
+                                        id="key-{{ key.id }}"
+                                        value="{{ key.accessUrl }}"
+                                        readonly
+                                >
+                                <button
+                                        class="btn btn-primary"
+                                        type="button"
+                                        onclick="copyKeyToClipboard({{ key.id }})"
+                                        style="height: auto;"
+                                        id="key-copy-button-{{ key.id }}"
+                                >
+                                    Copy
+                                </button>
                             </div>
                         </div>
-                    </td>
-                </tr>
-            {% endfor %}
+                    </div>
+                </td>
+                <td>{{ (key.usedBytes / 1000 / 1000 / 1000) |number_format(2) }} GB</td>
+                <td class="actions actions-as-dropdown">
+                    <div class="dropdown dropdown-actions">
+                        <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="21" width="21" fill="none"
+                                 viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path>
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" style="">
+                            <a class="dropdown-item action-edit" href="{{ path('admin', {
+                                routeName: 'admin_server_keys_edit',
+                                routeParams: {
+                                    serverId: server.id,
+                                    id: key.id
+                                }
+                            }) }}"><span class="action-label">Edit</span></a>
+                            <a class="dropdown-item action-delete text-danger" href="{{ path('admin', {
+                                routeName: 'admin_server_keys_delete',
+                                routeParams: {
+                                    serverId: server.id,
+                                    id: key.id
+                                }
+                            }) }}" data-action-name="delete" formaction="{{ path('admin', {
+                                routeName: 'admin_server_keys_delete',
+                                routeParams: {
+                                    serverId: server.id,
+                                    id: key.id
+                                }
+                            }) }}" data-bs-toggle="modal" data-bs-target="#modal-delete"><span class="action-label">Delete</span></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
 
