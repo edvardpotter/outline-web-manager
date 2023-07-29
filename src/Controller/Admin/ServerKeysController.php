@@ -131,7 +131,7 @@ class ServerKeysController extends AbstractDashboardController
 
         $serverKey = new ServerKey();
         $serverKey->name = $keyType->getName();
-        $serverKey->dataLimit = ($keyType->getDataLimit()['bytes'] ?? 0) / 1000;
+        $serverKey->dataLimit = ($keyType->getDataLimit() ?? 0) / 1000;
 
         $form = $this->createForm(ServerKeyType::class, $serverKey);
         $form->handleRequest($request);
