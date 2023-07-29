@@ -1415,16 +1415,16 @@
         },
         {
             "name": "edvardpotter/outline-manager-client",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/edvardpotter/outline-manager-client.git",
-                "reference": "a70da096c7ab1841fd69174fbace7ddd0b662ebf"
+                "reference": "5f50efecaf780da05d55bf16bf9cb4f56ea566aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/edvardpotter/outline-manager-client/zipball/a70da096c7ab1841fd69174fbace7ddd0b662ebf",
-                "reference": "a70da096c7ab1841fd69174fbace7ddd0b662ebf",
+                "url": "https://api.github.com/repos/edvardpotter/outline-manager-client/zipball/5f50efecaf780da05d55bf16bf9cb4f56ea566aa",
+                "reference": "5f50efecaf780da05d55bf16bf9cb4f56ea566aa",
                 "shasum": ""
             },
             "require": {
@@ -1458,9 +1458,9 @@
             ],
             "support": {
                 "issues": "https://github.com/edvardpotter/outline-manager-client/issues",
-                "source": "https://github.com/edvardpotter/outline-manager-client/tree/1.0.1"
+                "source": "https://github.com/edvardpotter/outline-manager-client/tree/1.0.2"
             },
-            "time": "2023-07-21T03:16:30+00:00"
+            "time": "2023-07-29T22:19:05+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
