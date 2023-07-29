@@ -1,0 +1,7 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}
+    Dashboard
+{% endblock %}
+
+{% set page_title_block_output %}{% block page_title %}{{ block('content_title') }}{% endblock %}{% endset %}

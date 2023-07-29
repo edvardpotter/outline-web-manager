@@ -1,0 +1,21 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}
+{% endblock %}
+
+{% set page_title_block_output %}{% block page_title %}Server is not available{% endblock %}{% endset %}
+
+{% block main %}
+    <div class="d-flex align-items-center justify-content-center vh-20">
+        <div class="text-center">
+            <p class="fs-3"> <span class="text-danger">Opps!</span> Server is not available.</p>
+            <p class="lead">
+                Check that the server at <span class="text-danger">{{ server.url }}</span> url is available.
+            </p>
+            <a href="{{ ea_url()
+                .setController('App\\Controller\\Admin\\ServerCrudController')
+                .setAction('detail')
+                .setEntityId(server.id) }}" class="btn btn-primary">Back to server</a>
+        </div>
+    </div>
+{% endblock %}

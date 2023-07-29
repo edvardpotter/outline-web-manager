@@ -1,0 +1,77 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}
+    Keys
+{% endblock %}
+
+{% block page_actions %}
+    <div class="global-actions">
+        <a class="btn btn-primary" href="{{ path('admin', {
+            routeName: 'admin_server_keys',
+            routeParams: {
+                serverId: server.id
+            }
+        }) }}">
+            <span class="action-label">Back to listing</span>
+        </a>
+    </div>
+{% endblock %}
+
+{% set page_title_block_output %}{% block page_title %}{{ block('content_title') }}{% endblock %}{% endset %}
+
+{% block main %}
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="row">
+        <div class="col-md-6 col-xxl-5">
+            <div class="field-text form-group">
+                {{ form_label(form.name, null, {
+                    'attr': {
+                        'class': 'form-control-label',
+                        'for': 'name'
+                    }
+                }) }}
+                <div class="form-widget">
+                    {{ form_widget(form.name, {
+                        'attr': {
+                            'class': 'form-control',
+                            'id': 'name'
+                        }
+                    }) }}
+                </div>
+            </div>
+        </div>
+        <div class="flex-fill"></div>
+        <div class="col-md-6 col-xxl-5">
+            <div class="field-text form-group">
+                {{ form_label(form.dataLimit, null, {
+                    'attr': {
+                        'class': 'form-control-label',
+                        'for': 'name'
+                    }
+                }) }}
+                <div class="form-widget">
+                    {{ form_widget(form.dataLimit, {
+                        'attr': {
+                            'class': 'form-control',
+                            'id': 'name'
+                        }
+                    }) }}
+                </div>
+            </div>
+        </div>
+        <div class="flex-fill"></div>
+        <div class="col-md-6 col-xxl-5">
+            <div class="form-group">
+                {{ form_widget(form.submit, {
+                    'label': 'Save',
+                    'attr': {
+                        'class': 'btn btn-primary',
+                    }
+                }) }}
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}
